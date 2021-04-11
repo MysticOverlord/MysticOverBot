@@ -1,0 +1,41 @@
+{
+	"folders": {},
+	"connections": {
+		"sqlite_jdbc-170f2d4a0cc-38369efd1782f989": {
+			"provider": "generic",
+			"driver": "sqlite_jdbc",
+			"name": "SQLite - database.db",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"database": "C:\\Users\\Dieser PC\\eclipse-workspace\\mysticoverbot2\\database.db",
+				"url": "jdbc:sqlite:C:\\Users\\Dieser PC\\eclipse-workspace\\mysticoverbot2\\database.db",
+				"type": "dev",
+				"handlers": {}
+			}
+		},
+		"sqlite_jdbc-170f2d73f28-1139195dac722860": {
+			"provider": "generic",
+			"driver": "sqlite_jdbc",
+			"name": "SQLite - database.db 2",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"database": "C:\\Users\\Dieser PC\\eclipse-workspace\\mysticoverbot2\\database.db",
+				"url": "jdbc:sqlite:C:\\Users\\Dieser PC\\eclipse-workspace\\mysticoverbot2\\database.db",
+				"type": "dev",
+				"handlers": {}
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false
+		}
+	}
+}
