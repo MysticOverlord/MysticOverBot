@@ -19,6 +19,7 @@ import org.json.simple.parser.JSONParser;
 
 import me.duncte123.botcommons.web.WebUtils;
 import me.mysticoverlord.mysticoverbot.Constants;
+import me.mysticoverlord.mysticoverbot.Main;
 import me.mysticoverlord.mysticoverbot.music.PlayerManager;
 import me.mysticoverlord.mysticoverbot.objects.ICommand;
 import me.mysticoverlord.mysticoverbot.objects.IMusic;
@@ -83,7 +84,7 @@ public class Play implements IMusic {
         } else {
         channel.sendMessage("Searching for ``" + input + "`` on youtube!").queue();
        
-        WebUtils.ins.getJSONObject("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=" + input + "&type=video&key=AIzaSyBE348UhpJdKuLEhef_e5ES3LnILvwm9Ro&fields=items(id/videoId)").async((json) -> {
+        WebUtils.ins.getJSONObject("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=" + input + "&type=video&key=" + Main.config.getString("youtube") + "&fields=items(id/videoId)").async((json) -> {
             try {
             	JsonNode item;
             	if (json.get("items").size() > 0) {         		
