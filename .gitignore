@@ -6,9 +6,5 @@ out/
 database.db
 botconfig.json
 banned.json
-Main.java
-SQLiteUtil.java
-Constants.java
-Encryption.java
 *.class
 *.bak
