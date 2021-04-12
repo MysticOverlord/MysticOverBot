@@ -29,9 +29,10 @@ import org.slf4j.LoggerFactory;
 
 public class Main {
     public static final Color PURPLE = new Color(128, 0, 128);
-    public static final Config config = new Config(new File(Constants.configpath)); 
+    public static Config config;
 
 	 public Main() throws IOException, SQLException {
+		config = new Config(new File(Constants.configpath)); 
 	    Logger logger = LoggerFactory.getLogger(Main.class);
     	SQLiteDataSource.getConnection();
     	logger.debug("SQLite database connection established!");
