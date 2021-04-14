@@ -63,7 +63,7 @@ implements ICommand {
             return;
         }
         event.getGuild().ban(target, 7).reason(String.format("By: %s\n Reason: %s", event.getAuthor(), reason)).queue();
-        EmbedBuilder builder = EmbedUtils.getDefaultEmbed().setColor(color).setTitle("Banned" + target.getUser().getAsTag() + "!")
+        EmbedBuilder builder = EmbedUtils.getDefaultEmbed().setColor(color).setTitle("Banned " + target.getUser().getAsTag() + "!")
 .addField("Moderator", event.getAuthor().getAsMention(), false).addField("Reason", reason, false);
         event.getGuild().kick(target, String.format("By: %s\n Reason: %s", event.getAuthor(), reason)).queue();
         target.getUser().openPrivateChannel().queue(channe -> channe.sendMessage("You have been banned from " + event.getGuild().getName()).queue());
