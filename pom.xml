@@ -60,10 +60,10 @@
       <version>4.13.1</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
+<dependency>
     <groupId>net.dv8tion</groupId>
     <artifactId>JDA</artifactId>
-    <version>4.2.0_241</version>
+    <version>4.2.1_253</version>
 </dependency>
 <dependency>
     <groupId>com.googlecode.json-simple</groupId>
@@ -95,7 +95,7 @@
     <dependency>
     <groupId>com.sedmelluq</groupId>
     <artifactId>lavaplayer</artifactId>
-    <version>1.3.73</version>
+    <version>1.3.76</version>
   </dependency>
   <dependency>
   <groupId>com.sedmelluq</groupId>
@@ -119,7 +119,11 @@
     <repository>
         <id>jitpack.io</id>
         <url>https://jitpack.io</url>
-    </repository>
+    </repository><repository>
+    <id>dv8tion</id>
+    <name>m2-dv8tion</name>
+    <url>https://m2.dv8tion.net/releases</url>
+</repository>
   <repository>
     <id>jcenter</id>
     <name>jcenter-bintray</name>
