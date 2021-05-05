@@ -62,7 +62,7 @@ extends ListenerAdapter {
      }
 		
         logger.info(String.format("Logged in as %#s\n", event.getJDA().getSelfUser()));
-       // new Thread(new GiveawayManager(event.getJDA()), "GiveawayManager").start();
+       new Thread(new GiveawayManager(event.getJDA()), "GiveawayManager").start();
         
         Timer timer = new Timer();
         timer.schedule(new TimerTask(){

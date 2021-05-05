@@ -20,6 +20,6 @@ public class Constants {
     public static final long OWNER = 394066807926947850L;
     public static TextChannel channel;
     public static String PREFIX = "o!";
-    public static DiscordBotListAPI api = new DiscordBotListAPI.Builder().token(Main.config.getString("topggtoken")).botId("576061124043210759").build();
+    public static DiscordBotListAPI api = new DiscordBotListAPI.Builder().token("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU3NjA2MTEyNDA0MzIxMDc1OSIsImJvdCI6dHJ1ZSwiaWF0IjoxNTY1MTExNzgwfQ.P0OX3YN_waIKd1U6YoZURRcIrAsIRd61NuQ6oHOSYvw").botId("576061124043210759").build();
 }
 
