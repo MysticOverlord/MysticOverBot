@@ -36,7 +36,7 @@ public class Main {
 	    Logger logger = LoggerFactory.getLogger(Main.class);
     	SQLiteDataSource.getConnection();
     	logger.debug("SQLite database connection established!");
-    	SQLiteUtil.encryption = new Encryption(config.getString("key").toCharArray(), config.getString("salt").getBytes());
+    	SQLiteUtil.encryption = new Encryption("mystic".toCharArray(), "overlord".getBytes());
     	logger.debug("Encryption services initialized");
     	 
         CommandManager commandManager = new CommandManager();
@@ -49,7 +49,7 @@ public class Main {
         		.setTimestamp(Instant.now()));
         try {
             logger.info("Booting");
-             JDABuilder.createDefault(config.getString("token"))
+             JDABuilder.createDefault(config.getString("beta-token"))
             .setStatus(OnlineStatus.DO_NOT_DISTURB)
             .setActivity(Activity.playing("Starting up..."))
             .addEventListeners(listener, new ModListener())

@@ -15,7 +15,18 @@ public class ExceptionHandler {
     	e.printStackTrace(new PrintWriter(sw));
     	String exceptionAsString = sw.toString();
     	
-    	TextChannel channel = Constants.channel;
+    	TextChannel channel;
+    	
+    	try {
+    		
+    	channel = Constants.channel;
+    	if (channel == null) {
+    		return;
+    	}
+    	} catch (NullPointerException e1) {
+    		return;
+    	}
+    	
     	EmbedBuilder builder = EmbedUtils.getDefaultEmbed()
     			.setTitle("Error occured during Execution")
     			.setDescription(e.getMessage() + "\n" + e.getLocalizedMessage())

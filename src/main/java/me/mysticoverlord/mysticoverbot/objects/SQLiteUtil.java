@@ -21,10 +21,9 @@ public class SQLiteUtil {
     public static Boolean getBoolean(String guildId, String setting) {
     	try (Connection con = SQLiteDataSource.getConnection();final PreparedStatement preparedStatement = con
                 // language=SQLite
-                .prepareStatement("SELECT ? FROM guild_settings WHERE guild_id = ?")) {
+                .prepareStatement("SELECT "+ setting + " FROM guild_settings WHERE guild_id = ?")) {
     		
-    		preparedStatement.setString(1, setting);
-    		preparedStatement.setString(2, encryption.encrypt(guildId));
+    		preparedStatement.setString(1, encryption.encrypt(guildId));
     		
     		try (final ResultSet resultSet = preparedStatement.executeQuery()) {
     			if (resultSet.next()) {
@@ -37,17 +36,15 @@ public class SQLiteUtil {
 			ExceptionHandler.handle(e);
     	}
     	return false;
-    }
-   
+    }   
     
     public static void updateBoolean(String guildId, String setting, Boolean bool, GuildMessageReceivedEvent event) {
     	
     	try (Connection con = SQLiteDataSource.getConnection();final PreparedStatement preparedStatement = con
                 // language=SQLite
-                .prepareStatement("UPDATE guild_settings SET ? = ? WHERE guild_id = ?")) {
-    		preparedStatement.setString(1, setting);
-    		preparedStatement.setBoolean(2, bool);
-    		preparedStatement.setString(3, encryption.encrypt(guildId));
+                .prepareStatement("UPDATE guild_settings SET "+ setting + " = ? WHERE guild_id = ?")) {
+    		preparedStatement.setBoolean(1, bool);
+    		preparedStatement.setString(2, encryption.encrypt(guildId));
     		
     		preparedStatement.executeUpdate();
     		
@@ -110,7 +107,7 @@ public class SQLiteUtil {
     }
     
     public static String getMuteFromUser(String guildId, String userId) {
-    	try (Connection con = SQLiteDataSource.getConnection();final PreparedStatement preparedStatement = con
+   	try (Connection con = SQLiteDataSource.getConnection();final PreparedStatement preparedStatement = con
                 // language=SQLite
                 .prepareStatement("SELECT mutedate FROM moderation WHERE guild_id = ? AND user_id = ?")) {
     		
@@ -190,9 +187,9 @@ public class SQLiteUtil {
     public static void deleteUserFromModeration(String userId, String guildId) {
     	try (Connection con = SQLiteDataSource.getConnection();final PreparedStatement preparedStatement = con
                 // language=SQLite
-                .prepareStatement("DELETE FROM moderation WHERE guild_id = ? AND user_Id = ?")) {
+               .prepareStatement("DELETE FROM moderation WHERE guild_id = ? AND user_Id = ?")) {
     		preparedStatement.setString(1,  encryption.encrypt(guildId));
-    		preparedStatement.setString(2,  encryption.encrypt(userId));
+   		preparedStatement.setString(2,  encryption.encrypt(userId));
     		
     		preparedStatement.executeUpdate();
     		
