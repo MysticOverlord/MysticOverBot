@@ -11,7 +11,7 @@ import org.discordbots.api.client.DiscordBotListAPI;
 import net.dv8tion.jda.api.entities.TextChannel;
 
 public class Constants {
-	public static final String configpath = "/home/pi/Bot/botconfig.json";
+public static final String configpath = "/home/pi/Bot/botconfig.json";
 	public static final String databasepath = "/home/pi/Bot/dbtest.db";
 	public static final Map<Long, Map<Long, Boolean>> votes = new HashMap<Long, Map<Long, Boolean>>();
 	public static final Map<Long, Boolean> loop = new HashMap<Long, Boolean>();
