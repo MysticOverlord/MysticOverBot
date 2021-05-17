@@ -36,12 +36,11 @@ public class Main {
 	    Logger logger = LoggerFactory.getLogger(Main.class);
     	SQLiteDataSource.getConnection();
     	logger.debug("SQLite database connection established!");
-    	SQLiteUtil.encryption = new Encryption("mystic".toCharArray(), "overlord".getBytes());
+    	SQLiteUtil.encryption = new Encryption(config.getString("key").toCharArray(), config.getString("salt").getBytes());
     	logger.debug("Encryption services initialized");
     	 
         CommandManager commandManager = new CommandManager();
         Listener listener = new Listener(commandManager);
-        
         WebUtils.setUserAgent("Mozilla/5.0 MyticOverbot/MysticOverlord#7967");
         
         EmbedUtils.setEmbedBuilder(() -> new EmbedBuilder()
