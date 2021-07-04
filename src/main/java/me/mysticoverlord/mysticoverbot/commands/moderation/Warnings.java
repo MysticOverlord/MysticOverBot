@@ -64,7 +64,7 @@ public class Warnings implements ICommand {
             }
         	String guildId = event.getGuild().getId();
         	String userId = target.getId();
-        	SQLiteUtil.updateWarnings(guildId, userId, 0, event);
+        	SQLiteUtil.updateWarnings(guildId, userId, 0, event.getChannel());
         	event.getChannel().sendMessage("Removed all warnings from " + target.getAsMention()).queue();
         	return;
         	
@@ -86,7 +86,7 @@ public class Warnings implements ICommand {
         	try {
         	   int warnings = Integer.parseInt(args.get(2));
         	   
-        	   SQLiteUtil.updateWarnings(event.getGuild().getId(), target.getId(), warnings, event);
+        	   SQLiteUtil.updateWarnings(event.getGuild().getId(), target.getId(), warnings, event.getChannel());
         	   event.getChannel().sendMessage("Warnings for " + target.getAsMention() + " has been set to: " + warnings).queue();
         	    
         	} catch (NumberFormatException e) {

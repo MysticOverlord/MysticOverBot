@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import me.mysticoverlord.mysticoverbot.Constants;
 import me.mysticoverlord.mysticoverbot.database.SQLiteDataSource;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 public class SQLiteUtil {
@@ -57,7 +58,7 @@ public class SQLiteUtil {
     	
     }
     
-    public static void updateWarnings(String guildId, String userId, int num, GuildMessageReceivedEvent event) {
+    public static void updateWarnings(String guildId, String userId, int num, TextChannel channel) {
     	try (Connection con = SQLiteDataSource.getConnection();final PreparedStatement preparedStatement = con
                 // language=SQLite
                 .prepareStatement("UPDATE moderation SET warnings = ? WHERE guild_id = ? AND user_Id = ?")) {
@@ -69,7 +70,7 @@ public class SQLiteUtil {
     		
     		
     	} catch (SQLException e) {
-    		event.getChannel().sendMessage("Failed to update ``warnings``!\nIf this problem persists pleas contact the Owner at my hideout or send a bug report with o!reportbug").queue();
+    		channel.sendMessage("Failed to update ``warnings``!\nIf this problem persists pleas contact the Owner at my hideout or send a bug report with o!reportbug").queue();
 			ExceptionHandler.handle(e);
     	}
     }
@@ -154,7 +155,7 @@ public class SQLiteUtil {
     	return null;
     }
     
-    public static void updateMuted(String guildId, String userId, String date, GuildMessageReceivedEvent event) {
+    public static void updateMuted(String guildId, String userId, String date, TextChannel channel) {
     	try (Connection con = SQLiteDataSource.getConnection();final PreparedStatement preparedStatement = con
                 // language=SQLite
                 .prepareStatement("UPDATE moderation SET mutedate = ? WHERE guild_id = ? AND user_Id = ?")) {
@@ -165,7 +166,7 @@ public class SQLiteUtil {
     		preparedStatement.executeUpdate();
     		
     	} catch (SQLException e) {
-    		event.getChannel().sendMessage("Failed to set a mute date!\nThis member is now muted indefinetely!\nIf this problem persists please contact the Owner at my hideout or send a bug report with o!reportbug").queue();
+    		channel.sendMessage("Failed to set a mute date!\nThis member is now muted indefinetely!\nIf this problem persists please contact the Owner at my hideout or send a bug report with o!reportbug").queue();
 			ExceptionHandler.handle(e);
     	}
     }

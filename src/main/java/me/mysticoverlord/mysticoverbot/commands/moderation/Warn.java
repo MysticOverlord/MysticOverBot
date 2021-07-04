@@ -70,8 +70,8 @@ public class Warn implements ICommand {
         }
 		
 		int warnings = 1 + SQLiteUtil.getWarnings(event.getGuild().getId(), target.getId());
-        SQLiteUtil.updateWarnings(event.getGuild().getId(), target.getId() , warnings, event);
-		String punishment =  ModUtil.warningPunishment(warnings, event, target);
+        SQLiteUtil.updateWarnings(event.getGuild().getId(), target.getId() , warnings, event.getChannel());
+		String punishment =  ModUtil.warningPunishment(warnings, event.getGuild(), target, event.getChannel());
 		
 		EmbedBuilder builder = EmbedUtils.getDefaultEmbed()
 				.addField("User", target.getAsMention(), true)

@@ -166,12 +166,19 @@ public class ModListener extends ListenerAdapter{
     	String newmessage= event.getMessage().getContentDisplay();
     	String guildId = event.getGuild().getId();
     	String messageId = event.getMessageId();
+    	String oldmessage = SQLiteUtil.getUpdatedMessage(messageId, newmessage);
+    	if (SQLiteUtil.getBoolean(event.getGuild().getId(), "swear_filter")) {
+    		if (ModUtil.containsSwear(event.getMessage().getContentDisplay()) && event.getGuild().getSelfMember().canInteract(event.getMember())) {
+    			ModUtil.doWarn(event, "Swearing (Edited Message)", newmessage, oldmessage);
+    			return;
+    		}
+    	}
+
     	
     	if (SQLiteUtil.getBoolean(guildId, "message_log") == false) {
     		return;
     	}
     	
-    	String oldmessage = SQLiteUtil.getUpdatedMessage(messageId, newmessage);
     	
     	if (oldmessage.equals(newmessage)) {
     		return;
@@ -269,7 +276,7 @@ public class ModListener extends ListenerAdapter{
     	}
 
     }
-     
+
     public void logMessages(GuildMessageReceivedEvent event) {
     	String guildId = event.getGuild().getId();
     	String userId = event.getAuthor().getId();

@@ -85,7 +85,7 @@ public class Tempmute implements ICommand {
 		}
 		
 		SQLiteUtil.getWarnings(event.getGuild().getId(), target.getId());
-		SQLiteUtil.updateMuted(event.getGuild().getId(), target.getId(), FormatUtil.dateCalculator(days, hours, minutes), event);
+		SQLiteUtil.updateMuted(event.getGuild().getId(), target.getId(), FormatUtil.dateCalculator(days, hours, minutes), event.getChannel());
 		
 		EmbedBuilder builder = EmbedUtils.getDefaultEmbed()
 				.setColor(new Color(150,150,0))
@@ -94,12 +94,12 @@ public class Tempmute implements ICommand {
 				.addField("Duration", duration(days, hours, minutes), true)
 				.addField("Reason", reason, true);
 		
-		event.getChannel().sendMessage(builder.build()).queue();
+		event.getChannel().sendMessageEmbeds(builder.build()).queue();
 
 			try {
-    			event.getGuild().getTextChannelsByName("log", true).get(0).sendMessage(builder.build()).queue();
+    			event.getGuild().getTextChannelsByName("log", true).get(0).sendMessageEmbeds(builder.build()).queue();
     			} catch (Exception e1) {
-    				event.getGuild().getTextChannelsByName("logs", true).get(0).sendMessage(builder.build()).queue();
+    				event.getGuild().getTextChannelsByName("logs", true).get(0).sendMessageEmbeds(builder.build()).queue();
     			}
 		}
 		
