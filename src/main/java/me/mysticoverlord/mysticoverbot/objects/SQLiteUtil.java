@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.HashMap;
 import org.slf4j.LoggerFactory;
 
+import me.mysticoverlord.mysticoverbot.Constants;
 import me.mysticoverlord.mysticoverbot.database.SQLiteDataSource;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
@@ -379,7 +380,7 @@ public class SQLiteUtil {
     	} catch (SQLException e) {
 			ExceptionHandler.handle(e);
     	}
-    	return "o!";
+    	return Constants.PREFIX;
     }
 
       public static void deleteIds() {

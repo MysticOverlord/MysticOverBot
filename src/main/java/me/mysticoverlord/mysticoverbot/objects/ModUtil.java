@@ -122,29 +122,17 @@ public class ModUtil {
 				.addField("User", event.getAuthor().getAsMention(), true)
 				.addField("Moderator", event.getJDA().getSelfUser().getAsMention(), true);
 		
-		if (warnings < 3) {
-			builder.setTitle("Warned " + event.getAuthor().getAsTag())
-			.setColor(YELLOW).addField("Reason", reason, true);
-		} else if (warnings < 9) {
-			builder.setTitle("Muted " + event.getAuthor().getAsTag())
-			.setColor(DARK_YELLOW).addField("Reason", reason, true )
-			.addField("Duration", punishment , true);
-		} else if (warnings == 9) {
-			builder.setTitle("Kicked " + event.getAuthor().getAsTag())
-			.setColor(RED).addField("Reason", reason + " (9th Violation)", true);
-		} else if (warnings >= 10) {
-			builder.setTitle("Banned " + event.getAuthor().getAsTag())
-			.setColor(DARK_RED).addField("Reason", reason + " (" + warnings + "th Violation)", true);
-		}
-		
-		builder.addField("Current Warnings", String.valueOf(warnings), true)
+		builder.setTitle((warnings < 3 ? "Warned " : warnings < 9 ? "Muted " : warnings == 9 ? "Kicked " : "Banned ") + event.getAuthor().getAsTag())
+		.setColor((warnings < 3 ? YELLOW : warnings < 9 ? DARK_YELLOW : warnings == 9 ? RED : DARK_RED))
+		.addField("Reason", reason + (warnings == 9 ? " (9th Violation)" : warnings == 10 ? " (" + String.valueOf(warnings) + " Violations)" : ""), true)
+		.addField("Current Warnings", String.valueOf(warnings), true)
 		.addField("Message", event.getMessage().getContentDisplay(), true)
 		.addField("In channel", event.getChannel().getAsMention(), true);
 		
 		try { 
 	    	TextChannel channel = event.getGuild().getTextChannelsByName("log", true).get(0);
 	    	if (channel != null && event.getGuild().getSelfMember().hasPermission(channel, Permission.MESSAGE_WRITE)) {
-	    		channel.sendMessage(builder.build()).timeout(10, TimeUnit.MILLISECONDS).queue();
+	    		channel.sendMessageEmbeds(builder.build()).timeout(10, TimeUnit.MILLISECONDS).queue();
 	    	}
 		} catch (IndexOutOfBoundsException e) {
 		}

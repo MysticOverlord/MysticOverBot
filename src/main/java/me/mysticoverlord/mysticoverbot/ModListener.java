@@ -154,11 +154,12 @@ public class ModListener extends ListenerAdapter{
     	builder.setFooter(event.getMessageId());
     	TextChannel channel = event.getGuild().getTextChannelsByName("log", true).get(0);
     	if (channel != null && event.getGuild().getSelfMember().hasPermission(channel, Permission.MESSAGE_WRITE)) {
-    		channel.sendMessage(builder.build()).timeout(10, TimeUnit.MILLISECONDS).queue();
+    		channel.sendMessageEmbeds(builder.build()).timeout(10, TimeUnit.MILLISECONDS).queue();
     	}
     }
     
-    public void onGuildMessageUpdate(GuildMessageUpdateEvent event) {
+    @SuppressWarnings("unused")
+	public void onGuildMessageUpdate(GuildMessageUpdateEvent event) {
     	if (event.getAuthor().isBot()) {
     		return;
     	}
@@ -172,10 +173,14 @@ public class ModListener extends ListenerAdapter{
     	
     	String oldmessage = SQLiteUtil.getUpdatedMessage(messageId, newmessage);
     	
+    	if (oldmessage.equals(newmessage)) {
+    		return;
+    	}
+    	
     	EmbedBuilder builder = EmbedUtils.getDefaultEmbed()
     			.setTitle("Edited Message")
-    			.addField("Author", event.getAuthor().getAsMention(), true)
-    			.addField("In Channel", event.getChannel().getAsMention(), true);
+    			.addField("In Channel", event.getChannel().getAsMention(), true)
+    			.addField("Author", event.getAuthor().getAsMention(), true);
     	
     	if (oldmessage == null) {
     		builder.addField("Old Message", "Unknown", false);
@@ -186,7 +191,7 @@ public class ModListener extends ListenerAdapter{
     	builder.addField("New Message", newmessage, false);
     	        
 			try {
-			event.getGuild().getTextChannelsByName("log", true).get(0).sendMessage(builder.build()).queue();
+			event.getGuild().getTextChannelsByName("log", true).get(0).sendMessageEmbeds(builder.build()).queue();
 			} catch (Exception e1) {
 				
 			}
@@ -227,7 +232,7 @@ public class ModListener extends ListenerAdapter{
                         
 
                			try {
-                			event.getGuild().getTextChannelsByName("log", true).get(0).sendMessage(builder.build()).queue();
+                			event.getGuild().getTextChannelsByName("log", true).get(0).sendMessageEmbeds(builder.build()).queue();
                 			} catch (Exception e1) {
                 			}
                 		}
@@ -236,7 +241,7 @@ public class ModListener extends ListenerAdapter{
 	
 	public void Antiinvite(GuildMessageReceivedEvent event) {
 		
-    	if (event.getMessage().getContentRaw().contains("https://discord.gg/") && !event.getMember().isOwner()) {    		
+    	if ((event.getMessage().getContentRaw().contains("https://discord.gg/") || !event.getMessage().getInvites().isEmpty()) && !event.getMember().isOwner()) {    		
 		String id = event.getGuild().getId();
 		
 		if (!ModUtil.isFromThisGuild(event) && !event.getAuthor().isBot()) {

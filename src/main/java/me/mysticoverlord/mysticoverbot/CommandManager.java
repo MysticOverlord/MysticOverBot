@@ -29,6 +29,7 @@ import me.mysticoverlord.mysticoverbot.objects.ExceptionHandler;
 import me.mysticoverlord.mysticoverbot.objects.ICommand;
 import me.mysticoverlord.mysticoverbot.objects.IMusic;
 import me.mysticoverlord.mysticoverbot.objects.SQLiteUtil;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import org.jetbrains.annotations.NotNull;
@@ -175,14 +176,14 @@ public class CommandManager {
     }
 
     @SuppressWarnings({ "resource" })
-	void handleCommand(GuildMessageReceivedEvent event) {
+	void handleCommand(GuildMessageReceivedEvent event, String prefix) {
+    	if (!event.getGuild().getSelfMember().hasPermission(Permission.MESSAGE_WRITE)) {
+    		return;
+    	}
         String[] split = null;
         // TODO if the prefix lowercase is faulty change it
-        if (event.getMessage().getContentRaw().toLowerCase().startsWith(Constants.PREFIX.toLowerCase())) {
-            split = event.getMessage().getContentRaw().replaceFirst("(?i)" + Pattern.quote(Constants.PREFIX), "").split("\\s+");
-        } else if (event.getMessage().getContentRaw().toLowerCase().startsWith("o!".toLowerCase())) {
-            split = event.getMessage().getContentRaw().replaceFirst("(?i)" + Pattern.quote("o!"), "").split("\\s+");
-        }
+            split = event.getMessage().getContentRaw().replaceFirst("(?i)" + Pattern.quote(prefix), "").split("\\s+");
+
             String invoke = split[0].toLowerCase();
             List<String> args = Arrays.asList(split).subList(1, split.length);
             

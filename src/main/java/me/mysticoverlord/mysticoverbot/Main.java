@@ -48,7 +48,7 @@ public class Main {
         		.setTimestamp(Instant.now()));
         try {
             logger.info("Booting");
-             JDABuilder.createDefault(config.getString("beta-token"))
+             JDABuilder.createDefault(config.getString("token"))
             .setStatus(OnlineStatus.DO_NOT_DISTURB)
             .setActivity(Activity.playing("Starting up..."))
             .addEventListeners(listener, new ModListener())

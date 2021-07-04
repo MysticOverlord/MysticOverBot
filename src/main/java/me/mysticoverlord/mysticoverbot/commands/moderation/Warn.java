@@ -50,12 +50,12 @@ public class Warn implements ICommand {
          
 		
 		if (!member.hasPermission(Permission.MANAGE_ROLES, Permission.KICK_MEMBERS, Permission.BAN_MEMBERS)){
-			channel.sendMessage("You need following permissions to use this command:\n``Manage Roles, Kick Members, Ban Members``").queue();
+			channel.sendMessage("You need following permissions to use this command:\n`Manage Roles, Kick Members, Ban Members`").queue();
 			return;
 		}
 		
 		if (!selfmember.hasPermission(Permission.MANAGE_ROLES, Permission.KICK_MEMBERS, Permission.BAN_MEMBERS)){
-			channel.sendMessage("I need following permissions to run this command:\n``Manage Roles, Kick Members, Ban Members``").queue();
+			channel.sendMessage("I need following permissions to run this command:\n`Manage Roles, Kick Members, Ban Members`").queue();
 			return;
 		}
         
